@@ -44,18 +44,20 @@ data:
     type = "database_unique_id"
 
     [database.apim_db]
-    type = "mysql"
-    url = "jdbc:mysql://wso2am-mysql-db-service:3306/WSO2AM_DB?useSSL=false&amp;autoReconnect=true&amp;requireSSL=false&amp;verifyServerCertificate=false"
-    username = "wso2carbon"
-    password = "wso2carbon"
-    driver = "com.mysql.cj.jdbc.Driver"
+    type = "postgre"
+    url = "jdbc:postgresql://10.27.64.3:5432/wso2_am?currentSchema=apim_db"
+    username = "vinloyalty"
+    password = "1qazxsw@"
+    driver = "org.postgresql.Driver"
+    validationQuery = "SELECT 1"
 
     [database.shared_db]
-    type = "mysql"
-    url = "jdbc:mysql://wso2am-mysql-db-service:3306/WSO2AM_SHARED_DB?useSSL=false&amp;autoReconnect=true&amp;requireSSL=false&amp;verifyServerCertificate=false"
-    username = "wso2carbon"
-    password = "wso2carbon"
-    driver = "com.mysql.cj.jdbc.Driver"
+    type = "postgre"
+    url = "jdbc:postgresql://10.27.64.3:5432/wso2_am?currentSchema=shared_db"
+    username = "vinloyalty"
+    password = "1qazxsw@"
+    driver = "org.postgresql.Driver"
+    validationQuery = "SELECT 1"
 
     [keystore.tls]
     file_name =  "wso2carbon.jks"
@@ -123,14 +125,17 @@ data:
     #expiry_time = "2m"
 
     [apim.key_manager]
-    service_url = "https://{{ template "am-pattern-3.resource.prefix" . }}-am-cp-service:${mgt.transport.https.port}/services/"
-    username = "$ref{super_admin.username}"
-    password = "$ref{super_admin.password}"
+    service_url = "https://is.vinloyal.com/services/"
+    type = "WSO2-IS"
     #pool.init_idle_capacity = 50
     #pool.max_idle = 100
     #key_validation_handler_type = "default"
     #key_validation_handler_type = "custom"
     #key_validation_handler_impl = "org.wso2.carbon.apimgt.keymgt.handlers.DefaultKeyValidationHandler"
+
+    [apim.oauth_config]
+    enable_outbound_auth_header = true
+    allowed_scopes = ["^device_.*", "openid", "editor", "profile"]
 
     #[apim.oauth_config]
     #enable_outbound_auth_header = false
