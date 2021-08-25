@@ -34,10 +34,6 @@ spec:
         node: {{ template "am-pattern-1.resource.prefix" . }}-am-2
     spec:
       initContainers:
-        {{ if .Values.wso2.deployment.dependencies.mysql }}
-        - name: init-mysql-db
-          image: busybox:1.32
-          command: ['sh', '-c', 'echo -e "Checking for the availability of MySQL Server deployment"; while ! nc -z "wso2am-mysql-db-service" 3306; do sleep 1; printf "-"; done; echo -e "  >> MySQL Server has started";']
         - name: init-mysql-connector-download
           image: busybox:1.32
           command:
@@ -47,10 +43,10 @@ spec:
               set -e
               connector_version=8.0.17
               wget https://repo1.maven.org/maven2/mysql/mysql-connector-java/${connector_version}/mysql-connector-java-${connector_version}.jar -P /mysql-connector-jar/
+              wget https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.18/postgresql-42.2.18.jar -P /mysql-connector-jar/
           volumeMounts:
             - name: mysql-connector-jar
               mountPath: /mysql-connector-jar
-        {{ end }}
       containers:
         - name: wso2am
 {{- include "image" (dict "Values" .Values "deployment" .Values.wso2.deployment.am) | indent 10 }}
