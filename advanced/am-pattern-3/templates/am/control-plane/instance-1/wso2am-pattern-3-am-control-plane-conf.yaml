@@ -124,7 +124,7 @@ data:
     #expiry_time = "2m"
 
     [apim.key_manager]
-    service_url = "https://is.vinloyal.com/services/"
+    service_url = "https://wso2is-pattern-1-identity-service.wso2:9443/services/"
     type = "WSO2-IS"
     #pool.init_idle_capacity = 50
     #pool.max_idle = 100

@@ -166,7 +166,7 @@ data:
     #claims_extractor_impl = "org.wso2.carbon.apimgt.impl.token.ExtendedDefaultClaimsRetriever"
 
     [apim.key_manager]
-    service_url = "https://is.vinloyal.com/services/"
+    service_url = "https://wso2is-pattern-1-identity-service.wso2:9443/services/"
     type = "WSO2-IS"
 
     [apim.oauth_config]
